@@ -50,12 +50,11 @@ const userSchema = new Schema({
 
 //Creating a Hash of the password
 
-userSchema.pre("save", async function(next){
-    if(!this.isModified("password")) return next()
+userSchema.pre("save", async function(){
+    if(!this.isModified("password")) return; 
     
     this.password = await bcrypt.hash(this.password , 10) 
-    next()
-
+    
 })
 
 //checking if the user's password is  same as the hashed password

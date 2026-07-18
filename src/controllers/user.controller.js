@@ -4,7 +4,7 @@ import User from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-const registerUser = asyncHandler(async (req,res)=>{
+const registerUser = asyncHandler(async (req,res,next)=>{
     //taking all the fields from the frontend 
     const{fullName,email,username,password}=req.body
 
@@ -16,7 +16,7 @@ const registerUser = asyncHandler(async (req,res)=>{
         throw new ApiError(400, "All fields required")
     }
     //checks if user already exists
-    let existedUser=User.findOne({
+    let existedUser= await User.findOne({
         $or: [{username},{email}]
     })
     if (existedUser) {

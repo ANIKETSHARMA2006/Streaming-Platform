@@ -2,11 +2,10 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { urlencoded } from "express";
-import dotenv from "dotenv";
+import "dotenv/config";
 
 const app = express();
 
-dotenv.config();
 
 app.use(
   cors({
